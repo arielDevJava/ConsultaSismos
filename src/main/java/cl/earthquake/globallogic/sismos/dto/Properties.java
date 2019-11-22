@@ -2,6 +2,9 @@ package cl.earthquake.globallogic.sismos.dto;
 
 import java.io.Serializable;
 
+/**
+ * Clase que setea propiedades de sismos
+ */
 public class Properties implements Serializable {
 
     private Double mag;

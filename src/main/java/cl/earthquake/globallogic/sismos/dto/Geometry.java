@@ -2,6 +2,9 @@ package cl.earthquake.globallogic.sismos.dto;
 
 import java.io.Serializable;
 
+/**
+ * clase que setea datos de ubicacion
+ */
 public class Geometry implements Serializable {
     private String type;
     private String[] coordinates;

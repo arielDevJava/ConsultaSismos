@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Clase que expone servicios rest para consulta de sismos
+ */
 @RestController
 @RequestMapping("/consulta/sismos")
 public class ConsultaController {
@@ -25,6 +28,12 @@ public class ConsultaController {
     @Autowired
     private ConsultaService consultaService;
 
+    /**
+     * Metodo que obtiene sismos dado un rango de fecha
+     * @param starttime fecha inicial
+     * @param endtime fecha final
+     * @return ResponseEntity
+     */
     @GetMapping(path="/fechas")
     @ResponseBody
     public ResponseEntity<Object> getSismosByFechas(@RequestParam String starttime, @RequestParam String endtime){
@@ -44,6 +53,12 @@ public class ConsultaController {
 
     }
 
+    /**
+     * Metodo que obtiene sismos dado un rango de magnitudes
+     * @param minmagnitude magnitud minima
+     * @param maxmagnitude magnitud maxima
+     * @return ResponseEntity
+     */
     @GetMapping(path="/magnitudes")
     @ResponseBody
     public ResponseEntity<Object> getSismosByMagnitudes(@RequestParam Double minmagnitude, @RequestParam Double maxmagnitude){
@@ -70,6 +85,14 @@ public class ConsultaController {
 
     }
 
+    /**
+     * Metodo que obtiene sismos dado un rango entre cuatro fechas
+     * @param fechaInicioR1 fecha inicial rango 1
+     * @param fechaTerminoR1 fecha final rango 1
+     * @param fechaInicioR2 fecha inicial rango 2
+     * @param fechaTerminoR2 fecha final rango 2
+     * @return ResponseEntity
+     */
     @GetMapping(path="/fechas/rango")
     @ResponseBody
     public ResponseEntity<Object> getSismosByRango(@RequestParam String fechaInicioR1, @RequestParam String fechaTerminoR1,
@@ -92,6 +115,11 @@ public class ConsultaController {
 
     }
 
+    /**
+     * Metodo que retorna sismos dado un pais
+     * @param pais nombre pais
+     * @return ResponseEntity
+     */
     @GetMapping(path="/pais")
     @ResponseBody
     public ResponseEntity<Object> getSismosByPais(@RequestParam String pais){
@@ -107,16 +135,24 @@ public class ConsultaController {
 
     }
 
+    /**
+     * Metodo que obtiene sismos dado paises y un rango de fecha
+     * @param paisR1 nombre pais rango 1
+     * @param paisR2 nombre pais rango 2
+     * @param starttime fecha inicial
+     * @param endtime fecha final
+     * @return ResponseEntity
+     */
     @GetMapping(path="/paises/fechas")
     @ResponseBody
     public ResponseEntity<Object> getSismosByPaisFecha(@RequestParam String paisR1, @RequestParam String paisR2,
-                                       @RequestParam String fechaR1, @RequestParam String fechaR2){
+                                       @RequestParam String starttime, @RequestParam String endtime){
         logger.info("getSismosByPaisFecha Rango Pais: "+ paisR1 +" "+paisR2);
-        logger.info("getSismosByPaisFecha Rango Fecha: "+ fechaR1 +" "+fechaR2);
+        logger.info("getSismosByPaisFecha Rango Fecha: "+ starttime +" "+endtime);
 
         try{
-            LocalDate fecIniR1 = LocalDate.parse(fechaR1, formatter);
-            LocalDate fecFinR1 = LocalDate.parse(fechaR2, formatter);
+            LocalDate fecIniR1 = LocalDate.parse(starttime, formatter);
+            LocalDate fecFinR1 = LocalDate.parse(endtime, formatter);
 
             return new ResponseEntity<>(consultaService.getSismosByPaisFecha(paisR1, paisR2, fecIniR1,  fecFinR1), HttpStatus.OK);
         }

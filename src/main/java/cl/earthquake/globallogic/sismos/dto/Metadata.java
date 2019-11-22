@@ -2,6 +2,9 @@ package cl.earthquake.globallogic.sismos.dto;
 
 import java.io.Serializable;
 
+/**
+ * Clase que setea metadata de sismos
+ */
 public class Metadata implements Serializable {
     private Double generated;
     private String url;

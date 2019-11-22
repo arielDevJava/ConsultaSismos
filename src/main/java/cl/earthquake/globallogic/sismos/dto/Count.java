@@ -2,6 +2,9 @@ package cl.earthquake.globallogic.sismos.dto;
 
 import java.io.Serializable;
 
+/**
+ * Clase que setea cantidad de sismos
+ */
 public class Count implements Serializable {
 
     private Integer count;

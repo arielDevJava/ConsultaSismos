@@ -2,6 +2,9 @@ package cl.earthquake.globallogic.sismos.dto;
 
 import java.io.Serializable;
 
+/**
+ * clase que setea caracteristicas de los sismos
+ */
 public class Features implements Serializable {
     private String type;
     private Properties properties;

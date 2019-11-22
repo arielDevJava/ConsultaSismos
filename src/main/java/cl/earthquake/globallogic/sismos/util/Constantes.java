@@ -1,5 +1,8 @@
 package cl.earthquake.globallogic.sismos.util;
 
+/**
+ * Clase que implementa constantes
+ */
 public class Constantes {
     public static final String START_TIME = "starttime";
     public static final String END_TIME = "endtime";
