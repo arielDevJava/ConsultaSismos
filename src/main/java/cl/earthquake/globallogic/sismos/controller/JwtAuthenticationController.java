@@ -4,7 +4,6 @@ package cl.earthquake.globallogic.sismos.controller;
 import cl.earthquake.globallogic.sismos.config.JwtTokenUtil;
 import cl.earthquake.globallogic.sismos.dto.JwtRequest;
 import cl.earthquake.globallogic.sismos.dto.JwtResponse;
-import cl.earthquake.globallogic.sismos.service.impl.JwtUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,7 +23,7 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private JwtUserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
