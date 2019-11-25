@@ -10,12 +10,12 @@
 - Estos servicios fueron desarrollados con arquitectura REST ocupando microservicos spring-boot, java 8
 - La documentacion esta integrada con Swagger en la siguiente url: http://localhost:8080/swagger-ui.html una vez compilador y puesto en marcha el servicio
 
-- Se ha configurado securidad jwt por lo que inicalmente se debera ejecutar el siguiente servicio:
+- Se ha configurado securidad jwt con usuario y clave por defecto, por lo que inicialmente se debera ejecutar el siguiente servicio:
   endpoint: localhost:8080/authenticate 
   method: post
-  body joson:{"username":"1234","password":"1234"} 
+  body joson:{"username":"user","password":"password"} 
   
-- Una vez ejecutado el sistema devolvera un jwttoken lo cual deberan copiar con 'Authorizacion Bearer' en los siguientes endpoint:
+- Una vez ejecutado el sistema devolvera un jwttoken lo cual deberan copiar e ingresar el tipo de Autenticacion como 'Bearer Token' en los siguientes endpoint:
   key: Authorization
   value: token generado con el primer servicio
 

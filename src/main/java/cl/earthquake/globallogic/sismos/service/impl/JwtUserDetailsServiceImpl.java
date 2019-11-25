@@ -4,20 +4,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-@Component("userDetailsService")
+@Component
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String password = "123456";
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
 
         UserDetails userDetails = new UserDetails() {
             @Override
@@ -27,7 +21,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
             @Override
             public String getPassword() {
-                return hashedPassword;
+                return "password";
             }
 
             @Override
