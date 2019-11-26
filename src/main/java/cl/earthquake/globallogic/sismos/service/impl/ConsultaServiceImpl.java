@@ -105,17 +105,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 
                 logger.debug("set "+set.size());
 
-                Data data = new Data();
-                Metadata metadata = new Metadata();
-                metadata.setGenerated(dataFecR1.getMetadata().getGenerated());
-                metadata.setUrl(dataFecR1.getMetadata().getUrl());
-                metadata.setTitle(dataFecR1.getMetadata().getTitle());
-                metadata.setStatus(dataFecR1.getMetadata().getStatus());
-                metadata.setApi(dataFecR1.getMetadata().getApi());
-                metadata.setCount(set.size());
+                Data data = getData(dataFecR1, set.size());
 
-                data.setType(dataFecR1.getType());
-                data.setMetadata(metadata);
                 data.setFeatures(set.stream().toArray(Features[]::new));
 
                 result = gson.toJson(data, Object.class);
@@ -150,17 +141,10 @@ public class ConsultaServiceImpl implements ConsultaService {
                     }
                 });
 
-                Data data = new Data();
-                Metadata metadata = new Metadata();
-                metadata.setGenerated(dataAll.getMetadata().getGenerated());
-                metadata.setUrl(dataAll.getMetadata().getUrl());
-                metadata.setTitle(dataAll.getMetadata().getTitle());
-                metadata.setStatus(dataAll.getMetadata().getStatus());
-                metadata.setApi(dataAll.getMetadata().getApi());
-                metadata.setCount(listAux.size());
+                logger.debug("listAux "+listAux.size());
 
-                data.setType(dataAll.getType());
-                data.setMetadata(dataAll.getMetadata());
+                Data data = getData(dataAll, listAux.size());
+
                 data.setFeatures(listAux.stream().toArray(Features[]::new));
 
                 result = gson.toJson(data, Object.class);
@@ -271,5 +255,27 @@ public class ConsultaServiceImpl implements ConsultaService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         return entity;
+    }
+
+    /**
+     * Metodo que setea Objeto Data
+     * @param dataAll datos extraidos de servicio
+     * @param size tamaño data
+     * @return Objeto Data
+     */
+    private Data getData(Data dataAll, int size){
+        Data data = new Data();
+        Metadata metadata = new Metadata();
+        metadata.setGenerated(dataAll.getMetadata().getGenerated());
+        metadata.setUrl(dataAll.getMetadata().getUrl());
+        metadata.setTitle(dataAll.getMetadata().getTitle());
+        metadata.setStatus(dataAll.getMetadata().getStatus());
+        metadata.setApi(dataAll.getMetadata().getApi());
+        metadata.setCount(size);
+
+        data.setType(dataAll.getType());
+        data.setMetadata(metadata);
+
+        return data;
     }
 }
